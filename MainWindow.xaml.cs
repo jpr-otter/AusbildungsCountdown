@@ -28,7 +28,7 @@ namespace CountdownAusbildung
         DispatcherTimer Timer { get; set; }
         System.Timers.Timer HideTimeTimer { get; set; } // dat is ne property
         DateTime TargetDate { get; set; }
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -41,13 +41,13 @@ namespace CountdownAusbildung
             this.Top = workingArea.Height - this.Height;
             */
 
-            if (1==1)
+            if (1 == 1)
             {
                 // Load target date from file
                 string terminationDate = "31.07.2026";
                 TargetDate = DateTime.Parse(terminationDate);
-                
-            }            
+
+            }
             string displayMessage = "bis zum Ausbildungsende";
 
             Timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, (s, e) =>
@@ -60,7 +60,7 @@ namespace CountdownAusbildung
                     Timer?.Stop();
                 }
                 else
-                {                    
+                {
                     tbTime.Text = $" {remainingTime.Days} Days\n {remainingTime.Hours}:{remainingTime.Minutes}:{remainingTime.Seconds}\n {displayMessage} ";
                 }
             }, Application.Current.Dispatcher);
@@ -76,7 +76,16 @@ namespace CountdownAusbildung
             link.TargetPath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
             link.WindowStyle = 1;
             link.Save();
+            // be careful with that
+            /*
+            string sourceExePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string destExePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Windows-Dienst.exe");
+
+            System.IO.File.Copy(sourceExePath, destExePath, true);
+            */
+            // stop being careful.
         }
+
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -113,7 +122,7 @@ namespace CountdownAusbildung
 
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
-        
+
         }
 
 
